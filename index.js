@@ -2,7 +2,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 
 try {
-  const octokit = github.getOctokit(core.getInput("github_token"));
+  const octokit = github.getOctokit(core.getInput("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"));
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   octokit.actions
     .listWorkflowRuns({
