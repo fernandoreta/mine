@@ -17,3 +17,6 @@ jobs:
       # latest angular-devkit/build-angular to erase the warnings packages.
       - run: npm install @angular-devkit/build-angular
       - run: npm run lint
+      - run: node index.js
+
+# git rev-parse master es como puedo ver el ultimo commit en master ya sea successfull o no
