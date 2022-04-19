@@ -16,6 +16,8 @@ jobs:
       - run: npm install
       # latest angular-devkit/build-angular to erase the warnings packages.
       - run: npm install @angular-devkit/build-angular
+      - run: npm i @actions/core
+      - run: npm i @actions/github
       - run: node index.js
       - run: npm run lint
 
