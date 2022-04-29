@@ -1,7 +1,7 @@
 console.log('yeah');
 var fs = require('fs');
 var fsfolder = require('fs-extra');
-var newdir = 'docs/5.0.0';
+var newdir = 'docs/1.0.0';
 
 if (!fs.existsSync(newdir)){
     fs.mkdirSync(newdir);
