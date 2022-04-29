@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "new-build": "node build.js",
-    "next-build": "ng build --prod --base-href=./ && mkdir docs/5.0.0 && node build.js && git add . && git commit -m '5.0.0' && git push origin"
+    "next-build": "ng build --prod --base-href=./ && mkdir docs/1.0.0 && node build.js && git add . && git commit -m '1.0.0' && git push origin"
   },
   "private": true,
   "dependencies": {
