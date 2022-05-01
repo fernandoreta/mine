@@ -13,7 +13,5 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: npm install
-      # latest angular-devkit/build-angular to erase the warnings packages.
-      - run: npm install @angular-devkit/build-angular
-      - run: npm run lint
+      - uses: actions/jekyll-build-pages@v1
+      - uses: actions/upload-artifact@main
