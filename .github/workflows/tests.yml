@@ -5,7 +5,7 @@ on:
     branches: [ master ]
     
 jobs:
-  ci_to_develop:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,3 +19,8 @@ jobs:
         with:
           name: github-pages
           path: ./docs/artifact.tar
+  report-build-status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/deploy-pages@v1
+        name: Report build status
