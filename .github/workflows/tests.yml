@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
+        name: Checkout
       - uses: actions/jekyll-build-pages@v1
+        name: Build page with Jekkyl
       - run: tar --dereference --hard-dereference --directory _site/ -cvf artifact.tar .
+        name: Archive build output
       - uses: actions/upload-artifact@main
+        name: Upload Artifact
         with:
           name: github-pages
           path: ./docs/artifact.tar
@@ -24,3 +24,9 @@ jobs:
     steps:
       - uses: actions/deploy-pages@v1
         name: Report build status
+        with:
+          emit_telemetry: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 5000
