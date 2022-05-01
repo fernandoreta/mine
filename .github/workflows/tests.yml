@@ -15,3 +15,5 @@ jobs:
       - run: npm ci
       - uses: actions/jekyll-build-pages@v1
       - uses: actions/upload-artifact@main
+        with:
+          name: artifact
