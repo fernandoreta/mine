@@ -14,6 +14,8 @@ jobs:
           node-version: 12
       - run: npm ci
       - uses: actions/jekyll-build-pages@v1
+      - run: tar --dereference --hard-dereference --directory _site/ -cvf artifact.tar .
       - uses: actions/upload-artifact@main
         with:
-          name: artifact
+          name: github-pages
+          path: ./docs/artifact.tar
