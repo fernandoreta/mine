@@ -1,0 +1,81 @@
+trigger: none
+
+jobs:
+  - job: Libs
+    pool:
+      name: Monorepo
+    steps:
+      - checkout: self
+        clean: false
+      - task: NodeTool@0
+        displayName: 'Use Node 12.x'
+        inputs:
+          versionSpec: 12.x
+      - script: git clean -ffdx -e node_modules
+        displayName: git clean -ffdx -e node_modules
+      - script: git reset --hard HEAD
+        displayName: git reset --hard HEAD
+      - script: npm install --no-progress
+        displayName: npm install --no-progress
+      - script: npm run build
+        displayName: npm run build
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish UX Platform'
+        inputs:
+          targetPath: dist/mine
+          artifact: mine
+      - script: git reset --hard HEAD
+        displayName: git reset --hard HEAD
+        condition: always()
+        env:
+          TOKEN: $(token)
+
+  - job: MineHarness
+    dependsOn:
+      - Libs
+    condition: and(succeeded(), contains(dependencies.Changeset.outputs['setvars.build'], '"mine"'))
+    pool:
+      name: Monorepo
+    steps:
+      - checkout: self
+        clean: false
+      - script: git clean -ffdx -e node_modules
+        displayName: git clean -ffdx -e node_modules
+      - script: git reset --hard HEAD
+        displayName: git reset --hard HEAD
+      - task: NodeTool@0
+        displayName: 'Use Node 12.x'
+        inputs:
+          versionSpec: 12.x
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download Mine Library'
+        inputs:
+          artifactName: mine
+          targetPath: dist/mine
+      - script: npm install --no-progress
+        displayName: 'npm install --no-progress'
+      - script: npm run build
+        displayName: 'npm run build'
+      - task: CopyFiles@2
+        inputs:
+          sourceFolder: dist/mine
+          targetFolder: pr-$(System.PullRequest.PullRequestId)-$(Build.BuildNumber)/mine
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Mine.'
+        inputs:
+          targetPath: 'dist/mine'
+          artifact: 'mine'
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: 'pr-$(System.PullRequest.PullRequestId)-$(Build.BuildNumber)'
+          includeRootFolder: true
+          archiveType: 'zip'
+          archiveFile: 'dist.zip'
+          replaceExistingArchive: true
+      - script: node ./build-scripts/deployment.js
+        env:
+            WEBAPP: $(webapp)
+        displayName: Upload to site.
+      - script: git reset --hard HEAD
+        displayName: git reset --hard HEAD
+        condition: always()
