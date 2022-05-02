@@ -34,22 +34,16 @@ jobs:
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
-  deployment:
+  deploy:
     runs-on: ubuntu-latest
-    environment: 
-      name: github-pages
+    needs: build
+    environment: github-pages
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - uses: actions/deploy-pages@v1
-  #       name: Deploy to Github github-pages
-  #       with:
-  #         emit_telemetry: false
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         timeout: 600000
-  #         error_count: 10
-  #         reporting_interval: 5000
+      - uses: actions/deploy-pages@v1
+        name: Deploy to Github github-pages
+        with:
+          emit_telemetry: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 5000
