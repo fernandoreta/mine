@@ -46,4 +46,5 @@ jobs:
           reporting_interval: 5000
         env:
           ACTIONS_ID_TOKEN_REQUEST_URL: 2254907455
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
