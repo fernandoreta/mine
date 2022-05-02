@@ -31,6 +31,36 @@ jobs:
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   permissions:
+  #     id-token: write
+  #     pull-requests: write
+  #     pages: write
+  #     contents: read
+  #   steps:
+  #     - uses: octokit/request-action@v2.x
+  #       name: get pull request ref
+  #       id: get_pull_request_ref
+  #       with:
+  #         route: GET /repos/:repository/pulls/:issue_id
+  #         repository: ${{ github.repository }}
+  #         issue_id: ${{ github.event.issue.number }}
+  #       env:
+  #         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  #     - uses: octokit/request-action@v2.x
+  #       name: create deployment
+  #       id: create_deployment
+  #       with:
+  #         route: POST /repos/:repository/deployments
+  #         repository: ${{ github.repository }}
+  #         ref: ${{ fromJson(steps.get_pull_request_ref.outputs.data).head.ref }}
+  #         environment: dev
+  #         auto_merge: false
+  #       env:
+  #         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -44,7 +74,6 @@ jobs:
         name: Deploy to Github github-pages
         with:
           emit_telemetry: false
-          branch: docs
           token: ${{ secrets.GITHUB_TOKEN }}
           timeout: 600000
           error_count: 10
