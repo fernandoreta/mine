@@ -2,7 +2,7 @@ name: ci
 
 on:
   pull_request:
-    branches: [ master, test-jekyll ]
+    branches: [ test-jekyll ]
     
 jobs:
   build:
@@ -50,4 +50,3 @@ jobs:
           error_count: 10
           reporting_interval: 5000
 
-          
