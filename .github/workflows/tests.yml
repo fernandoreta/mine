@@ -36,15 +36,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/deploy-pages@v1
-        name: Deploy to Github github-pages
+      - uses: actions/checkout@v1
+      - uses: sterlingwes/gh-pages-deploy-action@v1.1
         with:
-          emit_telemetry: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-          timeout: 600000
-          error_count: 10
-          reporting_interval: 5000
-        env:
-          ACTIONS_ID_TOKEN_REQUEST_URL: 2254907455
-          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          source-directory: public
+          build-command: npm run build
+    # steps:
+    #   - uses: actions/deploy-pages@v1
+    #     name: Deploy to Github github-pages
+    #     with:
+    #       emit_telemetry: false
+    #       token: ${{ secrets.GITHUB_TOKEN }}
+    #       timeout: 600000
+    #       error_count: 10
+    #       reporting_interval: 5000
+    #     env:
+    #       ACTIONS_ID_TOKEN_REQUEST_URL: https://pipelines.actions.githubusercontent.com/8DV84UCHw8aUCqAER1JVEhgHO4j9ogMWeNcQ33odmMNfCE3NC0/_apis/pipelines/workflows/2254907455/artifacts?api-version=6.0-preview
+    #       ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
