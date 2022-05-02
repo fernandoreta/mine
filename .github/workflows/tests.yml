@@ -15,13 +15,13 @@ jobs:
         name: Checkout
       - uses: actions/jekyll-build-pages@v1
         name: Build page with Jekkyl
-      - run: tar --dereference --directory docs/ -cvf artifact.tar .
+      - run: tar --dereference --hard-dereference --directory docs/ -cvf artifact.tar
         name: Archive build output
       - uses: actions/upload-artifact@main
         name: Upload Artifact
         with:
           name: github-pages
-          path: ./docs/artifact.tar
+          path: ./artifact.tar
   report-build-status:
     runs-on: ubuntu-latest
     needs: build
