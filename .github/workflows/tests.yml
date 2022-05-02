@@ -42,6 +42,7 @@ jobs:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           source-directory: public
           build-command: npm run build
+          deploy-branch: master
     # steps:
     #   - uses: actions/deploy-pages@v1
     #     name: Deploy to Github github-pages
