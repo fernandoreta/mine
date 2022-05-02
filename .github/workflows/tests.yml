@@ -37,7 +37,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment: pages_build_deployment
+    environment: github-pages
+    steps:
+      - name: deploy
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: build
