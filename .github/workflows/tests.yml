@@ -45,7 +45,7 @@ jobs:
         name: Deploy to Github github-pages
         with:
           emit_telemetry: false
-          deployment-branches: all
+          branch: docs
           token: ${{ secrets.GITHUB_TOKEN }}
           timeout: 600000
           error_count: 10
