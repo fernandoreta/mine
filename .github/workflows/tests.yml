@@ -39,8 +39,8 @@ jobs:
     environment: 
       name: github-pages
     steps:
-      - name: deploy
-      - run: npm install
+      - uses: actions/checkout@v2
+        name: Checkout
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: build
