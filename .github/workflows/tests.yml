@@ -30,3 +30,15 @@ jobs:
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/deploy-pages@v1
+        name: Deploy to Github github-pages
+        with:
+          emit_telemetry: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 5000
+
