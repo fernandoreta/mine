@@ -10,6 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Checkout
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm install
+      - run: npm run build
       - uses: actions/jekyll-build-pages@v1
         name: Build page with Jekkyl
       - run: tar --dereference --hard-dereference --directory docs/ -cvf artifact.tar .
