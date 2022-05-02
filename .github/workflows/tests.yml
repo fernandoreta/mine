@@ -36,7 +36,7 @@ jobs:
           reporting_interval: 5000
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: report-build-status
     steps:
       - uses: actions/deploy-pages@v1
         name: Deploy to Github github-pages
