@@ -26,7 +26,7 @@ jobs:
         name: Report build status
         with:
           emit_telemetry: true
-          token: ddd
+          token: ${{ secrets.GITHUB_TOKEN }}
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
@@ -37,7 +37,7 @@ jobs:
         name: Deploy to Github github-pages
         with:
           emit_telemetry: false
-          token: ddd
+          token: ${{ secrets.GITHUB_TOKEN }}
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
