@@ -34,10 +34,10 @@ jobs:
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
-  deploy:
+  deployment:
     runs-on: ubuntu-latest
-    needs: build
-    environment: github-pages
+    environment: 
+      name: github-pages
     steps:
       - name: deploy
   # deploy:
