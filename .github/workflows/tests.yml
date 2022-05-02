@@ -38,7 +38,8 @@ jobs:
     permissions:
       id-token: write
       pull-requests: write
-      contents: write
+      pages: write
+      contents: read
     steps:
       - uses: actions/deploy-pages@v1
         name: Deploy to Github github-pages
