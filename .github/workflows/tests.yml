@@ -44,4 +44,6 @@ jobs:
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
+        env:
+          ACTIONS_ID_TOKEN_REQUEST_URL: 2254907455
 
