@@ -16,7 +16,14 @@ jobs:
       - run: npm ci
       - run: npm install
       - run: npm run build
-      - run: mkdir -p test
+      - uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{github.token}}
+          script: |
+            const core = require('@actions/core')
+            const prNumber = context.payload.number;
+            core.exportVariable('PULL_NUMBER', prNumber);
+      - run: mkdir -p $PULL_NUMBER
       - uses: actions/jekyll-build-pages@v1
         name: Build page with Jekkyl
       - run: tar --dereference --hard-dereference --directory docs/ -cvf artifact.tar .
