@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
       - run: npm install
       - run: npm run build
-      - run: mkdir -p $(System.PullRequest.PullRequestId)
+      - run: mkdir -p test
       - uses: actions/jekyll-build-pages@v1
         name: Build page with Jekkyl
       - run: tar --dereference --hard-dereference --directory docs/ -cvf artifact.tar .
