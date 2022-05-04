@@ -15,7 +15,7 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm install
-      - run: npm install -g @angular/cli@latest
+      - run: npm install -g @angular/cli@10.2.3
       - run: ng build --output-path=${{ github.event.number }} --base-href=./
       - run: mkdir -p docs/${{ github.event.number }}
       - run: mv ${{ github.event.number }}/* docs/${{ github.event.number }}
