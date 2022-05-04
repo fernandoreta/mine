@@ -15,9 +15,9 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm install
-      - run: npm run build
+      - run: ng build --output-path=${{ github.event.number }} --base-href=./
       - run: mkdir -p docs/${{ github.event.number }}
-      - run: mv build/* docs/${{ github.event.number }}
+      - run: mv ${{ github.event.number }}/* docs/${{ github.event.number }}
       - uses: actions/jekyll-build-pages@v1
         name: Build page with Jekkyl
       - run: tar --dereference --hard-dereference --directory docs/ -cvf artifact.tar .
