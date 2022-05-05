@@ -57,3 +57,4 @@ jobs:
           timeout: 600000
           error_count: 10
           reporting_interval: 5000
+      - run: echo https://fernandoreta.github.io/mine/${{ github.event.number }}
